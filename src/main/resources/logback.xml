@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} %highlight(%5level) [%thread] %-40logger{40}:%-3L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="daily" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/zebra/logs/demo/daily.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/zebra/logs/demo/daily/%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} %5level [%-16.16thread] %-40.40logger{40}:%-3L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/zebra/logs/demo/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/zebra/logs/demo/error/%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+        <encoder>
+            <pattern>%d{yy-MM-dd HH:mm:ss.SSS} %5level [%-16.16thread] %-40.40logger{40}:%-3L - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+	<!-- project default level -->
+	<logger name="com.example.demo" level="DEBUG" />
+	<logger name="org.springframework" level="INFO" />
+
+	<root level="INFO">
+		<appender-ref ref="console" />
+		<appender-ref ref="daily" />
+		<appender-ref ref="error" />
+	</root>
+</configuration>

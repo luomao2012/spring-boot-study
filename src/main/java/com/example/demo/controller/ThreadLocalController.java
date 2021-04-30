@@ -8,8 +8,8 @@ import java.util.HashSet;
 
 /**
  * 测试多线程ThreadLocal
- * 1. ab工具命令 ab -n1000 -c 100 localhost:8080/add
- * 2. 查询结果：curl localhost:8080/get
+ * 1. ab工具命令 ab -n1000 -c 100 localhost:8087/add
+ * 2. 查询结果：curl localhost:8087/get
  * @author Marion
  * @date 2021/4/24
  */
@@ -65,6 +65,7 @@ public class ThreadLocalController {
     public int incAge() throws InterruptedException {
         // lockAdd();
         incAgeLocal();
+        System.out.println(Thread.currentThread().getName());
         return 1;
     }
 
